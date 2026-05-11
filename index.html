@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samuel Nhanag | GenAI for Work & Research</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f8fafc; /* Light Slate Gray/White */
+            --section-alt: #f1f5f9;
+            --card-bg: #ffffff;
+            --primary: #10b981; /* Emerald Green */
+            --primary-hover: #059669;
+            --secondary: #e2e8f0;
+            --accent: #34d399;
+            --text-main: #0f172a; /* Deep Navy for text */
+            --text-dim: #475569;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Subtle Light Background pattern */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 2px 2px, rgba(16, 185, 129, 0.08) 1px, transparent 0);
+            background-size: 40px 40px;
+            z-index: -2;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 10%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.25rem;
+            letter-spacing: -1px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .nav-btn {
+            background: var(--primary);
+            color: white !important;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary-hover);
+        }
+
+        /* Hero Section */
+        header {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 10% 60px;
+            background: linear-gradient(to bottom, #ffffff, var(--bg));
+        }
+
+        .hero-tag {
+            background: rgba(16, 185, 129, 0.08);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: #0f172a;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 700px;
+            margin-bottom: 2.5rem;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.9rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--section-alt);
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 10%;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+            max-width: 600px;
+        }
+
+        .section-header p {
+            color: var(--text-dim);
+            margin-top: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            color: #0f172a;
+        }
+
+        /* About Grid */
+        .about-container {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 5rem;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 2rem;
+        }
+
+        .tag {
+            background: #ffffff;
+            color: var(--text-main);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .stats-card {
+            background: #ffffff;
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            height: fit-content;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        /* Course Grid */
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .module-card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            padding: 2rem;
+            border-radius: 16px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .module-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.05);
+        }
+
+        .module-number {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .module-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            color: #1e293b;
+        }
+
+        .module-card p {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+        }
+
+        /* Submissions */
+        .submissions-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .submission-item {
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .sub-preview {
+            height: 200px;
+            background: #f1f5f9; /* Light grey instead of black */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sub-preview::after {
+            content: "PROJECT PREVIEW";
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: rgba(16, 185, 129, 0.3);
+            letter-spacing: 5px;
+        }
+
+        .sub-details {
+            padding: 1.5rem;
+        }
+
+        .sub-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .sub-details h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            color: #1e293b;
+        }
+
+        .sub-details p {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+        }
+
+        .link-btn {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+
+        .link-btn:hover {
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 10%;
+            text-align: center;
+            background: #ffffff;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-logo {
+            font-weight: 800;
+            margin-bottom: 1rem;
+            display: block;
+            color: var(--primary);
+        }
+
+        .footer-nav {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .footer-nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        .footer-nav a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 900px) {
+            .about-container { grid-template-columns: 1fr; }
+            nav ul { display: none; }
+            header { padding-top: 140px; }
+            h1 { font-size: 2.75rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo"><div class="logo-dot"></div> SAMUEL NHANAG</div>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#course">Course</a></li>
+            <li><a href="#submissions">Submissions</a></li>
+            <li><a href="#contact" class="nav-btn">Get In Touch</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <div class="hero-tag">GEN AI FELLOW · 2024</div>
+        <h1>Data Architecture & <br><span style="color: var(--primary);">GenAI</span> Innovation</h1>
+        <p class="hero-subtitle">Specializing in Statistician Engineering and Public Health Architecture. I leverage Generative AI to redefine the speed and precision of health research across the globe.</p>
+        <div class="cta-group">
+            <a href="#submissions" class="btn btn-primary">View My Submissions</a>
+            <a href="#about" class="btn btn-secondary">My Experience</a>
+        </div>
+    </header>
+
+    <section id="about">
+        <div class="section-header">
+            <h2 class="section-title">Professional Profile</h2>
+            <p>A veteran specialist merging classical statistics with modern intelligence.</p>
+        </div>
+        
+        <div class="about-container">
+            <div class="about-text">
+                <p>I am a <strong>Statistician Engineer</strong> and <strong>Public Health Expert</strong> with 20+ years of experience leading high-impact initiatives. My core work involves designing RMNCH strategic plans, impact modeling using <em>Lives Saved Tools</em>, and health facility assessments (HHFA).</p>
+                
+                <p>In this digital era, I am integrating <strong>Generative AI</strong> to automate complex data cleaning, enhance evidence synthesis, and streamline reporting workflows. I believe AI is the key to unlocking actionable insights from massive public health datasets in record time.</p>
+
+                <div class="tag-cloud">
+                    <span class="tag">Statistician Engineer</span>
+                    <span class="tag">Public Health Specialist</span>
+                    <span class="tag">Impact Modeling Expert</span>
+                    <span class="tag">RMNCH Strategy</span>
+                    <span class="tag">GenAI for Research</span>
+                    <span class="tag">M&E Leadership</span>
+                </div>
+            </div>
+
+            <div class="stats-card">
+                <div class="stat-item">
+                    <div class="stat-icon">🧬</div>
+                    <div>
+                        <h4 style="font-size: 1.1rem;">Data Synthesis</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Expertise in Stata, R, and AI-driven evidence extraction.</p>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">🌍</div>
+                    <div>
+                        <h4 style="font-size: 1.1rem;">Health Equity</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Focused on GFF Resource Mapping and resource tracking.</p>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">⚡</div>
+                    <div>
+                        <h4 style="font-size: 1.1rem;">Workflow Automation</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Building AI agents to handle repetitive research cycles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="course" style="background: var(--section-alt);">
+        <div class="section-header">
+            <h2 class="section-title">The GenAI Bootcamp</h2>
+            <p>An 8-week intensive on No-Code AI tools for the next generation of researchers.</p>
+        </div>
+
+        <div class="module-grid">
+            <div class="module-card">
+                <span class="module-number">Week 01</span>
+                <h3>Digital Presence</h3>
+                <p>Building high-performance research websites and portfolios using AI-assisted code generation.</p>
+            </div>
+            <div class="module-card">
+                <span class="module-number">Week 02</span>
+                <h3>AI Data Analysis</h3>
+                <p>Automating data cleaning and statistical visualization to reduce manual work hours.</p>
+            </div>
+            <div class="module-card">
+                <span class="module-number">Week 03</span>
+                <h3>Information Synthesis</h3>
+                <p>Techniques for rapid literature review and complex information management using LLMs.</p>
+            </div>
+            <div class="module-card">
+                <span class="module-number">Week 04</span>
+                <h3>AI Agent Building</h3>
+                <p>Creating custom-tuned research assistants and GPTs tailored to specific health datasets.</p>
+            </div>
+            <div class="module-card">
+                <span class="module-number">Week 05</span>
+                <h3>Systems Integration</h3>
+                <p>Linking AI tools into end-to-end automated pipelines for project management.</p>
+            </div>
+            <div class="module-card">
+                <span class="module-number">Week 06</span>
+                <h3>Public Outreach</h3>
+                <p>Visualizing results through AI-generated figures, summaries, and digital communications.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="submissions">
+        <div class="section-header">
+            <h2 class="section-title">Project Submissions</h2>
+            <p>Tracking my progress and artifacts from the GRAPH course.</p>
+        </div>
+
+        <div class="submissions-wrapper">
+            <div class="submission-item">
+                <div class="sub-preview">
+                    <div style="background: var(--primary); width: 40px; height: 40px; border-radius: 8px; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);"></div>
+                </div>
+                <div class="sub-details">
+                    <span class="sub-label">Assignment 01</span>
+                    <h4>Personal Research Site</h4>
+                    <p>Structured this professional portfolio using modular HTML/CSS and AI-assisted design.</p>
+                    <a href="#" class="link-btn">View Result <span>→</span></a>
+                </div>
+            </div>
+
+            <div class="submission-item">
+                <div class="sub-preview">
+                    <div style="border: 2px solid var(--accent); width: 40px; height: 40px; border-radius: 8px;"></div>
+                </div>
+                <div class="sub-details">
+                    <span class="sub-label">Assignment 02</span>
+                    <h4>Automated Data Pipeline</h4>
+                    <p>Showcasing the automation of cleaning raw public health survey data with LLM logic.</p>
+                    <a href="#" class="link-btn">Coming Soon <span>→</span></a>
+                </div>
+            </div>
+
+            <div class="submission-item">
+                <div class="sub-preview">
+                    <div style="background: var(--secondary); width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border);"></div>
+                </div>
+                <div class="sub-details">
+                    <span class="sub-label">Assignment 03</span>
+                    <h4>Synthesis Framework</h4>
+                    <p>Evidence mapping and literature synthesis using specialized research agents.</p>
+                    <a href="#" class="link-btn">Coming Soon <span>→</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <span class="footer-logo">SAMUEL NHANAG</span>
+        <p style="font-weight: 500; color: var(--text-main);">Statistician Engineer & Public Health Architect</p>
+        
+        <div class="footer-nav">
+            <a href="#about">Experience</a>
+            <a href="#course">Curriculum</a>
+            <a href="#submissions">Submissions</a>
+        </div>
+
+        <p class="copyright">© 2024 Samuel Nhanag. Designed & developed with Generative AI.</p>
+    </footer>
+
+</body>
+</html>
