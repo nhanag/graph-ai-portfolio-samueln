@@ -118,14 +118,25 @@
 
         /* Hero Section */
         header {
-            min-height: 80vh;
+            min-height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 120px 10% 60px;
+            padding: 140px 10% 60px;
             background: linear-gradient(to bottom, #ffffff, var(--bg));
+        }
+
+        .profile-avatar {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 2rem;
+            border: 4px solid #ffffff;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            background: var(--secondary);
         }
 
         .hero-tag {
@@ -331,7 +342,7 @@
 
         .sub-preview {
             height: 200px;
-            background: #f1f5f9; /* Light grey instead of black */
+            background: #f1f5f9;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -431,6 +442,7 @@
             nav ul { display: none; }
             header { padding-top: 140px; }
             h1 { font-size: 2.75rem; }
+            .profile-avatar { width: 120px; height: 120px; }
         }
     </style>
 </head>
@@ -447,6 +459,7 @@
     </nav>
 
     <header>
+        <img src="https://github.com/nhanag/graph-ai-portfolio-samueln/blob/main/Samuel.jpeg?raw=true" alt="Samuel Nhanag" class="profile-avatar">
         <div class="hero-tag">GEN AI FELLOW · 2024</div>
         <h1>Data Architecture & <br><span style="color: var(--primary);">GenAI</span> Innovation</h1>
         <p class="hero-subtitle">Specializing in Statistician Engineering and Public Health Architecture. I leverage Generative AI to redefine the speed and precision of health research across the globe.</p>
