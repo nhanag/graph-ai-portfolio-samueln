@@ -1,619 +1,451 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Samuel Nhanag | GenAI for Work & Research</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #f8fafc; /* Light Slate Gray/White */
-            --section-alt: #f1f5f9;
-            --card-bg: #ffffff;
-            --primary: #10b981; /* Emerald Green */
-            --primary-hover: #059669;
-            --secondary: #e2e8f0;
-            --accent: #34d399;
-            --text-main: #0f172a; /* Deep Navy for text */
-            --text-dim: #475569;
-            --border: #e2e8f0;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Samuel Nhanag | GenAI for Work & Research</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      line-height: 1.6;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    header {
+      padding: 24px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #020617;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
 
-        html {
-            scroll-behavior: smooth;
-        }
+    header h1 {
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      margin: 0;
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
-            color: var(--text-main);
-            line-height: 1.6;
-        }
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 24px;
+      font-size: 0.95rem;
+    }
 
-        /* Subtle Light Background pattern */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(circle at 2px 2px, rgba(16, 185, 129, 0.08) 1px, transparent 0);
-            background-size: 40px 40px;
-            z-index: -2;
-        }
+    nav a:hover {
+      color: #38bdf8;
+    }
 
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1rem 10%;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            border-bottom: 1px solid var(--border);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
+    section {
+      padding: 70px 8%;
+    }
 
-        .logo {
-            font-weight: 800;
-            font-size: 1.25rem;
-            letter-spacing: -1px;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+      min-height: 75vh;
+    }
 
-        .logo-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--primary);
-            border-radius: 50%;
-        }
+    .tag {
+      color: #38bdf8;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+    }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2.5rem;
-            align-items: center;
-        }
+    .hero h2 {
+      font-size: 3.2rem;
+      line-height: 1.1;
+      margin: 12px 0 20px;
+    }
 
-        nav a {
-            text-decoration: none;
-            color: var(--text-dim);
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
+    .hero p {
+      color: #cbd5e1;
+      font-size: 1.1rem;
+      max-width: 700px;
+    }
 
-        nav a:hover {
-            color: var(--primary);
-        }
+    .btn-group {
+      margin-top: 28px;
+    }
 
-        .nav-btn {
-            background: var(--primary);
-            color: white !important;
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: background 0.3s;
-        }
+    .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      margin-right: 12px;
+      font-weight: bold;
+    }
 
-        .nav-btn:hover {
-            background: var(--primary-hover);
-        }
+    .btn-primary {
+      background: #38bdf8;
+      color: #020617;
+    }
 
-        /* Hero Section */
-        header {
-            min-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 140px 10% 60px;
-            background: linear-gradient(to bottom, #ffffff, var(--bg));
-        }
+    .btn-secondary {
+      border: 1px solid #38bdf8;
+      color: #38bdf8;
+    }
 
-        .profile-avatar {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 2rem;
-            border: 4px solid #ffffff;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            background: var(--secondary);
-        }
+    .profile-img {
+      width: 100%;
+      max-width: 320px;
+      border-radius: 24px;
+      border: 3px solid #38bdf8;
+      box-shadow: 0 20px 50px rgba(56, 189, 248, 0.25);
+    }
 
-        .hero-tag {
-            background: rgba(16, 185, 129, 0.08);
-            color: var(--primary);
-            padding: 0.5rem 1rem;
-            border-radius: 100px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            border: 1px solid rgba(16, 185, 129, 0.2);
-        }
+    h2.section-title {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
 
-        h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 800;
-            letter-spacing: -2px;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            color: #0f172a;
-        }
+    .section-subtitle {
+      color: #94a3b8;
+      margin-bottom: 35px;
+    }
 
-        .hero-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-dim);
-            max-width: 700px;
-            margin-bottom: 2.5rem;
-        }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
 
-        .cta-group {
-            display: flex;
-            gap: 1rem;
-        }
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 16px;
+      padding: 24px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
 
-        .btn {
-            padding: 0.9rem 2rem;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #38bdf8;
+    }
 
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
-        }
+    .card h3 {
+      margin-top: 0;
+      color: #f8fafc;
+    }
 
-        .btn-primary:hover {
-            background: var(--primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
-        }
+    .card h4 {
+      margin: 8px 0;
+      color: #f8fafc;
+    }
 
-        .btn-secondary {
-            background: #ffffff;
-            color: var(--text-main);
-            border: 1px solid var(--border);
-        }
+    .card p {
+      color: #cbd5e1;
+    }
 
-        .btn-secondary:hover {
-            background: var(--section-alt);
-        }
+    .card a {
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-        /* Sections */
-        section {
-            padding: 100px 10%;
-        }
+    .week-label,
+    .assignment-label {
+      color: #38bdf8;
+      font-size: 0.85rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
 
-        .section-header {
-            margin-bottom: 4rem;
-            max-width: 600px;
-        }
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
 
-        .section-header p {
-            color: var(--text-dim);
-            margin-top: 0.5rem;
-        }
+    .skill {
+      background: #020617;
+      border: 1px solid #334155;
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: #cbd5e1;
+      font-size: 0.9rem;
+    }
 
-        .section-title {
-            font-size: 2.25rem;
-            font-weight: 700;
-            letter-spacing: -1px;
-            color: #0f172a;
-        }
+    footer {
+      background: #020617;
+      padding: 35px 8%;
+      text-align: center;
+      color: #94a3b8;
+    }
 
-        /* About Grid */
-        .about-container {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 5rem;
-        }
+    footer h3 {
+      color: #f8fafc;
+      margin-bottom: 5px;
+    }
 
-        .about-text p {
-            font-size: 1.1rem;
-            color: var(--text-dim);
-            margin-bottom: 1.5rem;
-        }
+    footer a {
+      color: #38bdf8;
+      text-decoration: none;
+      margin: 0 10px;
+    }
 
-        .tag-cloud {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            margin-top: 2rem;
-        }
+    @media (max-width: 800px) {
+      header {
+        flex-direction: column;
+        gap: 16px;
+      }
 
-        .tag {
-            background: #ffffff;
-            color: var(--text-main);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            border: 1px solid var(--border);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
+      nav a {
+        margin: 0 8px;
+      }
 
-        .stats-card {
-            background: #ffffff;
-            padding: 2.5rem;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            height: fit-content;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
-        }
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
 
-        .stat-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
+      .hero h2 {
+        font-size: 2.4rem;
+      }
 
-        .stat-icon {
-            width: 32px;
-            height: 32px;
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            font-size: 1rem;
-        }
+      .hero p {
+        margin: 0 auto;
+      }
 
-        /* Course Grid */
-        .module-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .module-card {
-            background: #ffffff;
-            border: 1px solid var(--border);
-            padding: 2rem;
-            border-radius: 16px;
-            transition: all 0.3s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-        }
-
-        .module-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 20px rgba(0,0,0,0.05);
-        }
-
-        .module-number {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .module-card h3 {
-            margin-bottom: 1rem;
-            font-size: 1.25rem;
-            color: #1e293b;
-        }
-
-        .module-card p {
-            font-size: 0.95rem;
-            color: var(--text-dim);
-        }
-
-        /* Submissions */
-        .submissions-wrapper {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .submission-item {
-            background: #ffffff;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-        }
-
-        .sub-preview {
-            height: 200px;
-            background: #f1f5f9;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .sub-preview::after {
-            content: "PROJECT PREVIEW";
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: rgba(16, 185, 129, 0.3);
-            letter-spacing: 5px;
-        }
-
-        .sub-details {
-            padding: 1.5rem;
-        }
-
-        .sub-label {
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .sub-details h4 {
-            font-size: 1.2rem;
-            margin-bottom: 0.75rem;
-            color: #1e293b;
-        }
-
-        .sub-details p {
-            font-size: 0.9rem;
-            color: var(--text-dim);
-            margin-bottom: 1.5rem;
-        }
-
-        .link-btn {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-main);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transition: color 0.2s;
-        }
-
-        .link-btn:hover {
-            color: var(--primary);
-        }
-
-        /* Footer */
-        footer {
-            padding: 80px 10%;
-            text-align: center;
-            background: #ffffff;
-            border-top: 1px solid var(--border);
-        }
-
-        .footer-logo {
-            font-weight: 800;
-            margin-bottom: 1rem;
-            display: block;
-            color: var(--primary);
-        }
-
-        .footer-nav {
-            margin: 2rem 0;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-        }
-
-        .footer-nav a {
-            color: var(--text-dim);
-            text-decoration: none;
-            font-size: 0.85rem;
-        }
-
-        .footer-nav a:hover {
-            color: var(--primary);
-        }
-
-        .copyright {
-            font-size: 0.8rem;
-            color: #94a3b8;
-        }
-
-        /* Mobile Adjustments */
-        @media (max-width: 900px) {
-            .about-container { grid-template-columns: 1fr; }
-            nav ul { display: none; }
-            header { padding-top: 140px; }
-            h1 { font-size: 2.75rem; }
-            .profile-avatar { width: 120px; height: 120px; }
-        }
-    </style>
+      .profile-img {
+        margin: 0 auto;
+      }
+    }
+  </style>
 </head>
+
 <body>
-
+  <header>
+    <h1>SAMUEL NHANAG</h1>
     <nav>
-        <div class="logo"><div class="logo-dot"></div> SAMUEL NHANAG</div>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#course">Course</a></li>
-            <li><a href="#submissions">Submissions</a></li>
-            <li><a href="#contact" class="nav-btn">Get In Touch</a></li>
-        </ul>
+      <a href="#about">About</a>
+      <a href="#course">Course</a>
+      <a href="#submissions">Submissions</a>
+      <a href="#contact">Get In Touch</a>
     </nav>
+  </header>
 
-    <header>
-        <img src="https://github.com/nhanag/graph-ai-portfolio-samueln/blob/main/Samuel.jpeg?raw=true" alt="Samuel Nhanag" class="profile-avatar">
-        <div class="hero-tag">GEN AI FELLOW · 2024</div>
-        <h1>Data Architecture & <br><span style="color: var(--primary);">GenAI</span> Innovation</h1>
-        <p class="hero-subtitle">Specializing in Statistician Engineering and Public Health Architecture. I leverage Generative AI to redefine the speed and precision of health research across the globe.</p>
-        <div class="cta-group">
-            <a href="#submissions" class="btn btn-primary">View My Submissions</a>
-            <a href="#about" class="btn btn-secondary">My Experience</a>
-        </div>
-    </header>
+  <section class="hero">
+    <div>
+      <p class="tag">Gen AI Fellow · 2024</p>
+      <h2>Data Architecture &<br />GenAI Innovation</h2>
+      <p>
+        Specializing in Statistician Engineering and Public Health Architecture.
+        I leverage Generative AI to redefine the speed and precision of health
+        research across the globe.
+      </p>
 
-    <section id="about">
-        <div class="section-header">
-            <h2 class="section-title">Professional Profile</h2>
-            <p>A veteran specialist merging classical statistics with modern intelligence.</p>
-        </div>
-        
-        <div class="about-container">
-            <div class="about-text">
-                <p>I am a <strong>Statistician Engineer</strong> and <strong>Public Health Expert</strong> with 20+ years of experience leading high-impact initiatives. My core work involves designing RMNCH strategic plans, impact modeling using <em>Lives Saved Tools</em>, and health facility assessments (HHFA).</p>
-                
-                <p>In this digital era, I am integrating <strong>Generative AI</strong> to automate complex data cleaning, enhance evidence synthesis, and streamline reporting workflows. I believe AI is the key to unlocking actionable insights from massive public health datasets in record time.</p>
+      <div class="btn-group">
+        <a class="btn btn-primary" href="#submissions">View My Submissions</a>
+        <a class="btn btn-secondary" href="#about">My Experience</a>
+      </div>
+    </div>
 
-                <div class="tag-cloud">
-                    <span class="tag">Statistician Engineer</span>
-                    <span class="tag">Public Health Specialist</span>
-                    <span class="tag">Impact Modeling Expert</span>
-                    <span class="tag">RMNCH Strategy</span>
-                    <span class="tag">GenAI for Research</span>
-                    <span class="tag">M&E Leadership</span>
-                </div>
-            </div>
+    <div>
+      <img
+        class="profile-img"
+        src="https://raw.githubusercontent.com/nhanag/graph-ai-portfolio-samueln/main/profile.jpg"
+        alt="Samuel Nhanag"
+      />
+    </div>
+  </section>
 
-            <div class="stats-card">
-                <div class="stat-item">
-                    <div class="stat-icon">🧬</div>
-                    <div>
-                        <h4 style="font-size: 1.1rem;">Data Synthesis</h4>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Expertise in Stata, R, and AI-driven evidence extraction.</p>
-                    </div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-icon">🌍</div>
-                    <div>
-                        <h4 style="font-size: 1.1rem;">Health Equity</h4>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Focused on GFF Resource Mapping and resource tracking.</p>
-                    </div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-icon">⚡</div>
-                    <div>
-                        <h4 style="font-size: 1.1rem;">Workflow Automation</h4>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Building AI agents to handle repetitive research cycles.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section id="about">
+    <h2 class="section-title">Professional Profile</h2>
+    <p class="section-subtitle">
+      A veteran specialist merging classical statistics with modern intelligence.
+    </p>
 
-    <section id="course" style="background: var(--section-alt);">
-        <div class="section-header">
-            <h2 class="section-title">The GenAI Bootcamp</h2>
-            <p>An 8-week intensive on No-Code AI tools for the next generation of researchers.</p>
-        </div>
+    <p>
+      I am a Statistician Engineer and Public Health Expert with 20+ years of
+      experience leading high-impact initiatives. My core work involves designing
+      RMNCH strategic plans, impact modeling using Lives Saved Tools, and health
+      facility assessments.
+    </p>
 
-        <div class="module-grid">
-            <div class="module-card">
-                <span class="module-number">Week 01</span>
-                <h3>Digital Presence</h3>
-                <p>Building high-performance research websites and portfolios using AI-assisted code generation.</p>
-            </div>
-            <div class="module-card">
-                <span class="module-number">Week 02</span>
-                <h3>AI Data Analysis</h3>
-                <p>Automating data cleaning and statistical visualization to reduce manual work hours.</p>
-            </div>
-            <div class="module-card">
-                <span class="module-number">Week 03</span>
-                <h3>Information Synthesis</h3>
-                <p>Techniques for rapid literature review and complex information management using LLMs.</p>
-            </div>
-            <div class="module-card">
-                <span class="module-number">Week 04</span>
-                <h3>AI Agent Building</h3>
-                <p>Creating custom-tuned research assistants and GPTs tailored to specific health datasets.</p>
-            </div>
-            <div class="module-card">
-                <span class="module-number">Week 05</span>
-                <h3>Systems Integration</h3>
-                <p>Linking AI tools into end-to-end automated pipelines for project management.</p>
-            </div>
-            <div class="module-card">
-                <span class="module-number">Week 06</span>
-                <h3>Public Outreach</h3>
-                <p>Visualizing results through AI-generated figures, summaries, and digital communications.</p>
-            </div>
-        </div>
-    </section>
+    <p>
+      In this digital era, I am integrating Generative AI to automate complex
+      data cleaning, enhance evidence synthesis, and streamline reporting
+      workflows. I believe AI is the key to unlocking actionable insights from
+      massive public health datasets in record time.
+    </p>
 
-    <section id="submissions">
-        <div class="section-header">
-            <h2 class="section-title">Project Submissions</h2>
-            <p>Tracking my progress and artifacts from the GRAPH course.</p>
-        </div>
+    <div class="skills">
+      <span class="skill">Statistician Engineer</span>
+      <span class="skill">Public Health Specialist</span>
+      <span class="skill">Impact Modeling Expert</span>
+      <span class="skill">RMNCH Strategy</span>
+      <span class="skill">GenAI for Research</span>
+      <span class="skill">M&E Leadership</span>
+    </div>
 
-        <div class="submissions-wrapper">
-            <div class="submission-item">
-                <div class="sub-preview">
-                    <div style="background: var(--primary); width: 40px; height: 40px; border-radius: 8px; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);"></div>
-                </div>
-                <div class="sub-details">
-                    <span class="sub-label">Assignment 01</span>
-                    <h4>Personal Research Site</h4>
-                    <p>Structured this professional portfolio using modular HTML/CSS and AI-assisted design.</p>
-                    <a href="#" class="link-btn">View Result <span>→</span></a>
-                </div>
-            </div>
+    <div class="cards" style="margin-top: 35px;">
+      <div class="card">
+        <h4>Data Synthesis</h4>
+        <p>Expertise in Stata, R, and AI-driven evidence extraction.</p>
+      </div>
 
-            <div class="submission-item">
-                <div class="sub-preview">
-                    <div style="border: 2px solid var(--accent); width: 40px; height: 40px; border-radius: 8px;"></div>
-                </div>
-                <div class="sub-details">
-                    <span class="sub-label">Workshop 02</span>
-                    <h4>Automated Data Analysis</h4>
-                    <p>Analyzed Gapminder data to explore relationships between two global indicators using AI tools.</p>
-                    <a href="https://github.com/nhanag/graph-ai-portfolio-samueln/blob/main/Generative%20AI%20for%20Work%20%26%20Research_wsp2.pdf" class="link-btn" target="_blank" rel="noopener noreferrer">View Report <span>→</span></a>
-                </div>
-            </div>
+      <div class="card">
+        <h4>Health Equity</h4>
+        <p>Focused on GFF Resource Mapping and resource tracking.</p>
+      </div>
 
-            <div class="submission-item">
-                <div class="sub-preview">
-                    <div style="background: var(--secondary); width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border);"></div>
-                </div>
-                <div class="sub-details">
-                    <span class="sub-label">Assignment 03</span>
-                    <h4>Synthesis Framework</h4>
-                    <p>Evidence mapping and literature synthesis using specialized research agents.</p>
-                    <a href="#" class="link-btn">Coming Soon <span>→</span></a>
-                </div>
-            </div>
-        </div>
-    </section>
+      <div class="card">
+        <h4>Workflow Automation</h4>
+        <p>Building AI agents to handle repetitive research cycles.</p>
+      </div>
+    </div>
+  </section>
 
-    <footer id="contact">
-        <span class="footer-logo">SAMUEL NHANAG</span>
-        <p style="font-weight: 500; color: var(--text-main);">Statistician Engineer & Public Health Architect</p>
-        
-        <div class="footer-nav">
-            <a href="#about">Experience</a>
-            <a href="#course">Curriculum</a>
-            <a href="#submissions">Submissions</a>
-        </div>
+  <section id="course">
+    <h2 class="section-title">The GenAI Bootcamp</h2>
+    <p class="section-subtitle">
+      An 8-week intensive on No-Code AI tools for the next generation of
+      researchers.
+    </p>
 
-        <p class="copyright">© 2024 Samuel Nhanag. Designed & developed with Generative AI.</p>
-    </footer>
+    <div class="cards">
+      <div class="card">
+        <p class="week-label">Week 01</p>
+        <h3>Digital Presence</h3>
+        <p>
+          Building high-performance research websites and portfolios using
+          AI-assisted code generation.
+        </p>
+      </div>
 
+      <div class="card">
+        <p class="week-label">Week 02</p>
+        <h3>AI Data Analysis</h3>
+        <p>
+          Automating data cleaning and statistical visualization to reduce manual
+          work hours.
+        </p>
+      </div>
+
+      <div class="card">
+        <p class="week-label">Week 03</p>
+        <h3>Information Synthesis</h3>
+        <p>
+          Techniques for rapid literature review and complex information
+          management using LLMs.
+        </p>
+      </div>
+
+      <div class="card">
+        <p class="week-label">Week 04</p>
+        <h3>AI Agent Building</h3>
+        <p>
+          Creating custom-tuned research assistants and GPTs tailored to specific
+          health datasets.
+        </p>
+      </div>
+
+      <div class="card">
+        <p class="week-label">Week 05</p>
+        <h3>Systems Integration</h3>
+        <p>
+          Linking AI tools into end-to-end automated pipelines for project
+          management.
+        </p>
+      </div>
+
+      <div class="card">
+        <p class="week-label">Week 06</p>
+        <h3>Public Outreach</h3>
+        <p>
+          Visualizing results through AI-generated figures, summaries, and
+          digital communications.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="submissions">
+    <h2 class="section-title">Project Submissions</h2>
+    <p class="section-subtitle">
+      Tracking my progress and artifacts from the GRAPH course.
+    </p>
+
+    <div class="cards">
+      <div class="card">
+        <p class="assignment-label">Assignment 01</p>
+        <h4>Personal Research Site</h4>
+        <p>
+          Structured this professional portfolio using modular HTML/CSS and
+          AI-assisted design.
+        </p>
+        <a href="https://nhanag.github.io/graph-ai-portfolio-samueln/" target="_blank">
+          View Result →
+        </a>
+      </div>
+
+      <div class="card">
+        <p class="assignment-label">Workshop 02</p>
+        <h4>Automated Data Analysis</h4>
+        <p>
+          Analyzed Gapminder data to explore relationships between two global
+          indicators using AI tools.
+        </p>
+        <a
+          href="https://github.com/nhanag/graph-ai-portfolio-samueln/blob/main/AI%20training%20week2.pdf"
+          target="_blank"
+        >
+          View Report →
+        </a>
+      </div>
+
+      <div class="card">
+        <p class="assignment-label">Workshop 03</p>
+        <h4>Job Market Data Analysis</h4>
+        <p>
+          Used LLMs in Google Sheets to extract information from job postings,
+          then analyzed the data with AI tools to explore relationships between
+          experience requirements, programming languages, and salaries.
+        </p>
+        <a
+          href="https://github.com/nhanag/graph-ai-portfolio-samueln/blob/main/AI%20training%20week3.pdf"
+          target="_blank"
+        >
+          View Report →
+        </a>
+      </div>
+
+      <div class="card">
+        <p class="assignment-label">Assignment 03</p>
+        <h4>Synthesis Framework</h4>
+        <p>
+          Evidence mapping and literature synthesis using specialized research
+          agents.
+        </p>
+        <a href="#">Coming Soon →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <h3>SAMUEL NHANAG</h3>
+    <p>Statistician Engineer & Public Health Architect</p>
+
+    <p>
+      <a href="#about">Experience</a>
+      <a href="#course">Curriculum</a>
+      <a href="#submissions">Submissions</a>
+    </p>
+
+    <p>© 2024 Samuel Nhanag. Designed & developed with Generative AI.</p>
+  </footer>
 </body>
 </html>
